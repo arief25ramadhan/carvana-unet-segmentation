@@ -8,20 +8,52 @@ In this repo, we implement U-Net Semantic Segmentation from scratch for Carvana 
 
 The U-Net architecture is a popular CNN model for image segmentation. It was first introduced in 2015, and has since been widely adopted in various field. The U-Net consists of an encoder path to capture features, a decoder path for generating a segmentation map, and skip connections connect the encoder and decoder paths, enabling the model to combine low-level and high-level features. The U-Net effectively captures details and context, making it ideal for segmentation tasks. The U-Net architecture is as follow.
 
+<p align="center">
+  <img src="media/u-net-architecture.png" width="350" title="hover text">
+</p>
+
 ### 1.2. Dataset
+The dataset is obtained from Kaggle's Carvana Image Masking Challenge in 2017. The goal is to develop an algorithm that automatically removes the photo studio background from the car.
+
+In this repository, we only use the training set, and split it into train/val/test set. We don't download the test set from Kaggle because it has a very huge size. The data consists of car images and their corresponding masks as  shown below.
+
+<p align="center">
+  <img src="media/0cdf5b5d0ce1_04.jpg" width="350" title="hover text">
+  <img src="media/0cdf5b5d0ce1_04_mask.gif" width="350" title="hover text">
+</p>
 
 ### 1.3. Results
+
+After training the data for 10 epoch, we achieved an accuracy of 99.2% on the test set. We consider this result as satisfactory enough considering the short time of development.
 
 ## 2. Usage
 
 ### 2.1. Dependencies
 
-### 2.2. Training
-We use automatic mixed precision to speed up the training process. The model is trained for 10 epochs. To perform training, you could run:
+The dependencies of this project includes:
 
+- numpy
+- torch
+- torchvision
+- Pillow
+- opencv
+- albumentations
+
+### 2.2. Training
+
+We use automatic mixed precision to speed up the training process. The model is trained for 10 epochs. To perform training, you could run this command on terminal:
+ ```
 python train.py
+```
 
 ### 2.3. Testing
 
 
-## 2.4. Speed Up Inference
+
+
+### 2.4. Speed Up Inference 
+
+
+## Credit 
+
+This project is mainly for learning purposes and is heavily based on the tutorial from Aladdin Person Youtube channel. The original code is available here (https://github.com/aladdinpersson/Machine-Learning-Collection/tree/master/ML/Pytorch/image_segmentation/semantic_segmentation_unet).
