@@ -1,5 +1,9 @@
 # Carvana U-Net Segmentation
 
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white)
+[![ONNX](https://img.shields.io/badge/ONNX-A6A9AA?style=for-the-badge&logo=onnx&logoColor=white)](https://github.com/onnx/onnx)
+
 ## 1. Project Summary
 
 In this repo, we implement U-Net Semantic Segmentation from scratch for Carvana Image Masking Challenge. The main difference between this architecture and the original paper is that we use padded convolutions instead of valid (unpadded) convolutions.
@@ -24,7 +28,9 @@ In this repository, we only use the training set, and split it into train/val/te
 
 ### 1.3. Results
 
-After training the data for 10 epoch, we achieved an accuracy of 99.2% on the test set. We consider this result as satisfactory enough considering the short time of development.
+After training the data for 10 epoch, we achieved an accuracy of 99.2% on the test set. We consider this result as satisfactory enough considering the short time of development. 
+
+We also convert the model into Onnx runtime to speed up the inference time by 2x. The media below compares the FPS performance of the original torch model and onnx model.
 
 ## 2. Usage
 
@@ -46,14 +52,33 @@ We use automatic mixed precision to speed up the training process. The model is 
 python train.py
 ```
 
-### 2.3. Testing
+### 2.3. Evaluate
 
+To evaluate the data on the test set, run this command
+ ```
+python test.py
+```
 
+### 2.4. Inference an Image
 
+To perform an inference on a single image, run this command:
 
-### 2.4. Speed Up Inference 
+```
+python inference.py 
+```
 
+Make sure to change the image_path and output_path in the inference.py script.
+
+### 2.5. Speed Up Inference 
+
+We also convert the model to Onnx runtime to speed up the inference time. The onnx model is available in this path. To perform inference on onnx runtime run this command
+
+```
+python inference_onnx.py 
+```
+
+Make sure to change the image_path and output_path in the inference_onnx.py script.
 
 ## Credit 
 
-This project is mainly for learning purposes and is heavily based on the tutorial from Aladdin Person Youtube channel. The original code is available here (https://github.com/aladdinpersson/Machine-Learning-Collection/tree/master/ML/Pytorch/image_segmentation/semantic_segmentation_unet).
+This project is mainly for learning purposes and is heavily based on the tutorial from [Aladdin Person's Youtube channel](https://www.youtube.com/watch?v=IHq1t7NxS8k). The original code is available [here](https://github.com/aladdinpersson/Machine-Learning-Collection/tree/master/ML/Pytorch/image_segmentation/semantic_segmentation_unet).
