@@ -14,21 +14,22 @@ from utils import(
     save_prediction_as_imgs
 )
 
-
 # Hyperparameters
 LEARNING_RATE = 1e-4
 DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
 BATCH_SIZE = 32
-NUM_EPOCHS = 100
+NUM_EPOCHS = 10
 NUM_WORKERS = 2
 IMAGE_HEIGHT = 160
 IMAGE_WIDTH = 240
 PIN_MEMORY = True
 LOAD_MODEL = True
-TRAIN_IMG_DIR = 'data/train_images/'
+TRAIN_IMG_DIR = 'data/train/'
 TRAIN_MASK_DIR = 'data/train_masks/'
-VAL_IMG_DIR = 'data/val_images/'
+VAL_IMG_DIR = 'data/val/'
 VAL_MASK_DIR = 'data/val_masks/'
+
+print('Device: ', DEVICE)
 
 def train_fn(loader, model, optimizer, loss_fn, scaler):
     loop = tqdm(loader)
@@ -121,10 +122,6 @@ def main():
             val_loader, model, folder="saved_images/", device=DEVICE
         )
 
-
-
-
-    
 
 if __name__ == "__main__":
     main()

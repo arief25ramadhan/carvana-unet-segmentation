@@ -1,2 +1,5 @@
 data/
 saved_images/
+split_data.py
+__pycache__
+*.pth.tar
