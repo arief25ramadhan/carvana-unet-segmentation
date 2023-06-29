@@ -15,7 +15,6 @@ IMAGE_WIDTH = 720
 BATCH_SIZE = 32
 NUM_WORKERS = 2
 PIN_MEMORY = True
-DEVICE = 'cuda'
 
 TEST_IMG_DIR = 'data/test/'
 TEST_MASK_DIR = 'data/test_masks/'
@@ -47,7 +46,7 @@ test_loader= DataLoader(
 )
 
 # Load model
-model = UNET(in_channels=3, out_channels=1).to(DEVICE)
+model = UNET(in_channels=3, out_channels=1)
 model_path = 'model/model_2.pth.tar'
 checkpoint = torch.load(model_path)
 model.load_state_dict(checkpoint['state_dict'])
@@ -55,12 +54,14 @@ model.load_state_dict(checkpoint['state_dict'])
 # save_prediction_as_imgs(test_loader, model, folder="saved_images/", device='cuda')
 
 # Inference function
-def inference_image(image_path, model, image_transform):
+def inference_image(image_path, model, image_transform, device='cuda'):
+
+    model = model.to(device)
     
     img = np.array(Image.open(image_path).convert("RGB"))
     # get normalized image
     img_normalized = image_transform(image=img)
-    img_normalized = img_normalized['image'].unsqueeze(0).to(DEVICE)
+    img_normalized = img_normalized['image'].unsqueeze(0).to(device)
     print(img_normalized.shape)
 
     model.eval()
