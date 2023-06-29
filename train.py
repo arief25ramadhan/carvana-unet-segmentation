@@ -17,11 +17,11 @@ from utils import(
 # Hyperparameters
 LEARNING_RATE = 1e-4
 DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
-BATCH_SIZE = 32
-NUM_EPOCHS = 10
+BATCH_SIZE = 4
+NUM_EPOCHS = 5
 NUM_WORKERS = 2
-IMAGE_HEIGHT = 160
-IMAGE_WIDTH = 240
+IMAGE_HEIGHT = 480
+IMAGE_WIDTH = 720
 PIN_MEMORY = True
 LOAD_MODEL = True
 TRAIN_IMG_DIR = 'data/train/'
@@ -52,8 +52,6 @@ def train_fn(loader, model, optimizer, loss_fn, scaler):
 
         # update tqdm loop
         loop.set_postfix(loss=loss.item())
-
-
 
 
 def main():
@@ -112,7 +110,7 @@ def main():
             'state_dict': model.state_dict(),
             'optimizer': optimizer.state_dict(),
         }
-        save_checkpoint(checkpoint)
+        save_checkpoint(checkpoint, filename='model_2.pth.tar')
 
         # check accuracy
         check_accuracy(val_loader, model, device=DEVICE)

@@ -8,9 +8,10 @@ from albumentations.pytorch import ToTensorV2
 from PIL import Image
 import numpy as np
 import torchvision
+import cv2
 
-IMAGE_HEIGHT = 160
-IMAGE_WIDTH = 240
+IMAGE_HEIGHT = 480
+IMAGE_WIDTH = 720
 BATCH_SIZE = 32
 NUM_WORKERS = 2
 PIN_MEMORY = True
@@ -47,7 +48,7 @@ test_loader= DataLoader(
 
 # Load model
 model = UNET(in_channels=3, out_channels=1).to(DEVICE)
-model_path = 'model/model.pth.tar'
+model_path = 'model/model_2.pth.tar'
 checkpoint = torch.load(model_path)
 model.load_state_dict(checkpoint['state_dict'])
 
@@ -68,10 +69,25 @@ def inference_image(image_path, model, image_transform):
 
         preds = torch.sigmoid(model(img_normalized))
         preds = (preds>0.5).float()
-        print(preds.shape)
-        torchvision.utils.save_image(
-            preds, "pred_test.png"
-        )
 
-image_path = 'data/test/0cdf5b5d0ce1_04.jpg'
+        torchvision.utils.save_image(
+            preds, "pred.png"
+        )
+       
+    img_tensor = img_normalized*255
+    mask_tensor = preds*255
+
+    # Convert Image to OpenCV
+    cv_img = img_tensor[0].cpu().numpy().transpose(1, 2, 0)
+    cv_mask = mask_tensor[0].cpu().numpy().transpose(1, 2, 0)
+
+    # Masking
+    masked_car = np.copy(cv_img)
+    masked_car[(cv_mask>254).all(-1)] = [0,255,0]
+    masked_car_w = cv2.addWeighted(masked_car, 0.3, cv_img, 0.7, 0, masked_car)
+    cv2.imwrite('masked_car_w.jpg', masked_car_w)
+
+
+# image_path = 'data/test/0cdf5b5d0ce1_04.jpg'
+image_path = 'data/test/0ee135a3cccc_04.jpg'
 inference_image(image_path, model, test_transform)
