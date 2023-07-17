@@ -4,3 +4,7 @@ split_data.py
 __pycache__
 *.pth.tar
 model/
+convert_to_onnx.py
+onnx_optimization.py
+tensorrt_optimization.py
+torchscript_optimization.py
