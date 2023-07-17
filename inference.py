@@ -78,6 +78,7 @@ def inference_image(image_path, model, image_transform, device='cuda'):
     img_tensor = img_normalized*255
     mask_tensor = preds*255
 
+    # depth_map = (depth_map*255).astype(np.uint8)
     # Convert Image to OpenCV
     cv_img = img_tensor[0].cpu().numpy().transpose(1, 2, 0)
     cv_mask = mask_tensor[0].cpu().numpy().transpose(1, 2, 0)

@@ -2,7 +2,7 @@
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white)
-[![ONNX](https://img.shields.io/badge/ONNX-A6A9AA?style=for-the-badge&logo=onnx&logoColor=white)](https://github.com/onnx/onnx)
+<!-- [![ONNX](https://img.shields.io/badge/ONNX-A6A9AA?style=for-the-badge&logo=onnx&logoColor=white)](https://github.com/onnx/onnx) -->
 
 ## 1. Project Summary
 
@@ -10,7 +10,7 @@ In this repo, we implement U-Net Semantic Segmentation from scratch for Carvana 
 
 ### 1.1. Architecture
 
-The U-Net architecture is a popular CNN model for image segmentation. It was first introduced in 2015, and has since been widely adopted in various field. The U-Net consists of an encoder path to capture features, a decoder path for generating a segmentation map, and skip connections connect the encoder and decoder paths, enabling the model to combine low-level and high-level features. The U-Net effectively captures details and context, making it ideal for segmentation tasks. The U-Net architecture is as follow.
+The U-Net architecture is a popular CNN model for image segmentation. It was first introduced in 2015, and has since been widely adopted in various field. The U-Net consists of an encoder path to capture features, a decoder path for generating a segmentation map, and skip connections connect the encoder and decoder paths, enabling the model to combine low-level and high-level features. The U-Net effectively captures details and context, making it ideal for segmentation tasks. The figure below is a visualization of U-Net architecture.
 
 <p align="center">
   <img src="media/u-net-architecture.png" width="350" title="hover text">
@@ -69,7 +69,12 @@ python inference.py
 
 Make sure to change the image_path and output_path in the inference.py script.
 
-### 2.5. Speed Up Inference 
+<p align="center">
+  <img src="media/0ee135a3cccc_04.jpg" width="350" title="hover text">
+  <img src="media/masked_car_w.jpg" width="350" title="hover text">
+</p>
+
+<!-- ### 2.5. Speed Up Inference 
 
 We also convert the model to Onnx runtime to speed up the inference time. The onnx model is available in this path. To perform inference on onnx runtime run this command
 
@@ -77,7 +82,7 @@ We also convert the model to Onnx runtime to speed up the inference time. The on
 python inference_onnx.py 
 ```
 
-Make sure to change the image_path and output_path in the inference_onnx.py script.
+Make sure to change the image_path and output_path in the inference_onnx.py script. -->
 
 ## Credit 
 
