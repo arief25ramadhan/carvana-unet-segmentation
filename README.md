@@ -52,14 +52,14 @@ We use automatic mixed precision to speed up the training process. The model is 
 python train.py
 ```
 
-### 2.3. Evaluate
+<!-- ### 2.3. Evaluate
 
 To evaluate the data on the test set, run this command
  ```
 python test.py
-```
+``` -->
 
-### 2.4. Inference an Image
+### 2.3. Inference an Image
 
 To perform an inference on a single image, run this command:
 
