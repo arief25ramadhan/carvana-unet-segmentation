@@ -30,7 +30,7 @@ In this repository, we only use the training set, and split it into train/val/te
 
 After training the data for 10 epoch, we achieved an accuracy of 99.2% on the test set. We consider this result as satisfactory enough considering the short time of development. 
 
-We also convert the model into Onnx runtime to speed up the inference time by 2x. The media below compares the FPS performance of the original torch model and onnx model.
+<!-- We also convert the model into Onnx runtime to speed up the inference time by 2x. The media below compares the FPS performance of the original torch model and onnx model. -->
 
 ## 2. Usage
 
